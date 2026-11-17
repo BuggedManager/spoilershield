@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpoilerShield Settings</title>
+  <link rel="icon" href="icons/icon32.png">
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="side">
+      <div class="side-brand"><img src="icons/icon48.png" alt="" width="34" height="34"><div><strong>SpoilerShield</strong><span class="muted">Settings</span></div></div>
+      <nav aria-label="Settings sections">
+        <a href="#protection">Protection</a>
+        <a href="#sites">Websites</a>
+        <a href="#keywords">Keywords</a>
+        <a href="#profiles">Game profiles</a>
+        <a href="#detection">Detection</a>
+        <a href="#images">Images (experimental)</a>
+        <a href="#test">Test detection</a>
+        <a href="#data">Backup &amp; data</a>
+        <a href="#about">Privacy &amp; limits</a>
+      </nav>
+      <div class="side-foot faint" id="version"></div>
+    </aside>
+
+    <main class="content">
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <section id="protection" class="panel">
+        <h2>Protection</h2>
+        <div class="row">
+          <div><strong>Enable SpoilerShield</strong><p class="muted">Turns all protection on or off everywhere. Changes apply instantly to open tabs.</p></div>
+          <label class="switch"><input type="checkbox" data-bind="enabled" aria-label="Enable SpoilerShield"><span class="track"></span></label>
+        </div>
+        <div class="row col">
+          <div><strong>Protection mode</strong></div>
+          <div class="modes" role="radiogroup" aria-label="Protection mode">
+            <label class="mode"><input type="radio" name="mode" value="standard"><span><b>Standard</b><small>Obvious GTA 6 references and high-confidence spoilers. Fewest false positives.</small></span></label>
+            <label class="mode"><input type="radio" name="mode" value="strict"><span><b>Strict <em class="rec">Recommended</em></b><small>Everything recognised as GTA 6 – including harmless news, promo material and gameplay videos.</small></span></label>
+            <label class="mode"><input type="radio" name="mode" value="maximum"><span><b>Maximum Protection</b><small>Uses the lowest threshold and keeps articles, posts and list items hidden until they have been evaluated. This can briefly hide safe content or cause layout shifts. Reveal any item individually.</small></span></label>
+          </div>
+        </div>
+        <div class="row"><div><strong>Block GTA 6 content</strong><p class="muted">Hide anything that is clearly about GTA 6.</p></div><label class="switch"><input type="checkbox" data-bind="blockGameContent" aria-label="Block GTA 6 content"><span class="track"></span></label></div>
+        <div class="row"><div><strong>Block potential story spoilers</strong><p class="muted">Lower threshold for content that combines the game with spoiler words (ending, death, final mission, leak…). Turn off "Block GTA 6 content" to allow general news but still hide story spoilers.</p></div><label class="switch"><input type="checkbox" data-bind="blockStorySpoilers" aria-label="Block potential story spoilers"><span class="track"></span></label></div>
+        <div class="row"><div><strong>Hide spoiler tab titles</strong><p class="muted">Replaces a page's tab title when it contains GTA 6 content.</p></div><label class="switch"><input type="checkbox" data-bind="protectTabTitle" aria-label="Hide spoiler tab titles"><span class="track"></span></label></div>
+      </section>
+
+      <section id="sites" class="panel">
+        <h2>Websites</h2>
+        <p class="muted lead">Specialised protection for major sites; a generic detector covers everything else.</p>
+        <div class="grid-sites" id="siteToggles"></div>
+        <div class="two">
+          <div>
+            <h3>Allowlist <span class="muted">(protection paused)</span></h3>
+            <form class="inline-add" data-list="allowlist"><input class="input" placeholder="example.com" aria-label="Add site to allowlist"><button class="btn" type="submit">Add</button></form>
+            <div class="chips" id="allowlist"></div>
+          </div>
+          <div>
+            <h3>Blocklist <span class="muted">(always Maximum Protection)</span></h3>
+            <form class="inline-add" data-list="blocklist"><input class="input" placeholder="gta-news-site.com" aria-label="Add site to blocklist"><button class="btn" type="submit">Add</button></form>
+            <div class="chips" id="blocklist"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="keywords" class="panel">
+        <h2>Custom keywords</h2>
+        <p class="muted lead">Added to the GTA 6 profile. Spelling, spacing and hashtag variants are generated automatically. <b>Strong</b> blocks on its own, <b>Medium</b> blocks in Strict/Maximum, <b>Weak</b> only counts next to other GTA 6 context.</p>
+        <form class="kw-add" id="kwForm">
+          <input class="input" id="kwInput" maxlength="120" placeholder="Keyword or phrase" aria-label="Keyword">
+          <select class="input" id="kwStrength" aria-label="Strength"><option value="strong">Strong</option><option value="medium" selected>Medium</option><option value="weak">Weak</option></select>
+          <button class="btn primary" type="submit">Add keyword</button>
+        </form>
+        <details class="bulk"><summary>Import many keywords at once</summary>
+          <textarea class="input" id="kwBulk" placeholder="One keyword per line"></textarea>
+          <button class="btn" id="kwBulkAdd" type="button">Import as Medium</button>
+        </details>
+        <div class="table" id="kwList"></div>
+      </section>
+
+      <section id="profiles" class="panel">
+        <h2>Game profiles</h2>
+        <p class="muted lead">The built-in GTA 6 profile uses only officially announced names. Add profiles to protect yourself from other games too – the overlay will show the profile name.</p>
+        <div class="row"><div><strong>Built-in GTA 6 profile</strong><p class="muted" id="dictInfo"></p></div><label class="switch"><input type="checkbox" data-bind="builtinProfileEnabled" aria-label="Built-in GTA 6 profile"><span class="track"></span></label></div>
+        <div id="profileList" class="profiles"></div>
+        <button class="btn" id="addProfile" type="button">+ Add game profile</button>
+      </section>
+
+      <section id="detection" class="panel">
+        <h2>Detection</h2>
+        <div class="row col">
+          <div><strong>Sensitivity</strong><p class="muted">Shifts the score needed to hide something, on top of the selected mode.</p></div>
+          <div class="seg seg-3" role="radiogroup" aria-label="Sensitivity">
+            <button type="button" data-sens="low">Low</button><button type="button" data-sens="medium">Medium</button><button type="button" data-sens="high">High</button>
+          </div>
+        </div>
+        <div class="row col"><div><strong>Languages</strong><p class="muted">Spoiler vocabulary to recognise. Titles, names and places work in every language.</p></div><div class="langs" id="langs"></div></div>
+        <div class="row"><div><strong>Extended detection</strong> <span class="tag">Layer 4 · local</span><p class="muted">Typo-tolerant matching of distinctive names (e.g. "Lucia Caminoss") and indirect references ("Rockstar's next game", "le prochain GTA"). No AI model, no network.</p></div><label class="switch"><input type="checkbox" data-bind="extendedDetection" aria-label="Extended detection"><span class="track"></span></label></div>
+      </section>
+
+      <section id="images" class="panel">
+        <h2>Images <span class="tag warn">Experimental</span></h2>
+        <div class="row"><div><strong>Block images &amp; thumbnails</strong><p class="muted">Use image alt text and file names as detection signals and hide matching images. Cards on supported sites are always hidden as a whole (thumbnail included).</p></div><label class="switch"><input type="checkbox" data-bind="blockImages" aria-label="Block images and thumbnails"><span class="track"></span></label></div>
+        <div class="row"><div><strong>Local image matching</strong><p class="muted">Compares on-screen images with perceptual fingerprints of reference images you add below (for example official key art). Runs entirely on this computer. Needs the optional "read data on all sites" permission so images can be re-read from their original host (normally from cache). It recognises re-posts of your reference images – it cannot recognise arbitrary GTA 6 screenshots, and it will miss heavily cropped or edited images.</p><p class="muted small" id="imgStatus"></p></div><label class="switch"><input type="checkbox" id="imageDetection" aria-label="Local image matching"><span class="track"></span></label></div>
+        <div class="refs">
+          <label class="btn" for="refFiles">Add reference images…</label>
+          <input type="file" id="refFiles" accept="image/*" multiple class="sr-only">
+          <span class="muted small" id="refCount"></span>
+          <div class="ref-list" id="refList"></div>
+        </div>
+      </section>
+
+      <section id="test" class="panel">
+        <h2>Test detection</h2>
+        <p class="muted lead">Type any headline to see whether SpoilerShield would hide it with your current settings. Runs locally.</p>
+        <textarea class="input" id="testInput" placeholder="e.g. GTA 6 ending explained"></textarea>
+        <div class="test-out" id="testOut" aria-live="polite"></div>
+      </section>
+
+      <section id="data" class="panel">
+        <h2>Backup &amp; data</h2>
+        <div class="actions">
+          <button class="btn" id="export" type="button">Export settings</button>
+          <label class="btn" for="importFile">Import settings…</label>
+          <input type="file" id="importFile" accept="application/json,.json" class="sr-only">
+          <button class="btn danger" id="resetStats" type="button">Reset statistics</button>
+          <button class="btn danger" id="resetSettings" type="button">Restore default settings</button>
+        </div>
+        <p class="muted small" id="statsInfo"></p>
+      </section>
+
+      <section id="about" class="panel">
+        <h2>Privacy &amp; limitations</h2>
+        <div class="prose">
+          <p><b>Privacy.</b> SpoilerShield has no accounts, analytics, ads or remote code. Page text is analysed inside the tab and never leaves your computer. Settings and simple counters (number of items hidden per day – no URLs, titles or sites) are stored with <code>chrome.storage.local</code>.</p>
+          <p><b>Permissions.</b> <code>storage</code> saves your settings. The content script runs on all sites because spoilers can appear anywhere; it only reads the page to decide what to hide. The optional all-sites host permission is requested only if you turn on local image matching.</p>
+          <p><b>Limitations.</b> No browser extension can guarantee that every spoiler is hidden before it is displayed. Content can slip through when it is rendered in a canvas or video frame, inside closed shadow DOM, inside cross-origin frames the extension cannot access, in pages opened before the extension was installed, on browser-internal pages (chrome://, the Web Store), in images without descriptive text, in audio, or when websites change their markup. Detection is keyword-and-context based: unusual phrasing, other languages, or heavy obfuscation may be missed, and harmless content may occasionally be hidden.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

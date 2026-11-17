@@ -1,0 +1,64 @@
+{
+  "id": "gta6",
+  "name": "GTA 6",
+  "version": "2026.11.17",
+  "sources": [
+    "Rockstar Games official site rockstargames.com/VI (characters and places, May 2025 reveal)",
+    "Grand Theft Auto VI Trailer 1 (Dec 2023) and Trailer 2 (May 2025) - official Rockstar uploads",
+    "Secondary coverage cross-checked: gematsu.com, gamereactor.eu (May 2025)"
+  ],
+  "notes": "Only officially announced names. No leaked or story content. Weights are tuned by tests/unit/detector.test.ts.",
+  "numerals": ["6", "vi", "six"],
+  "groups": [
+    {
+      "category": "title",
+      "weight": 100,
+      "expandNumeral": true,
+      "prefixMatch": true,
+      "terms": ["gta {n}", "grand theft auto {n}", "grand theft auto: {n}", "gta: {n}"]
+    },
+    {
+      "category": "character",
+      "weight": 65,
+      "terms": ["jason duval", "lucia caminos", "cal hampton", "boobie ike", "dre'quan priest", "raul bautista", "brian heder"]
+    },
+    { "category": "character", "weight": 55, "terms": ["real dimez"] },
+    { "category": "character", "weight": 45, "terms": ["bae-luxe"] },
+    {
+      "category": "pair",
+      "weight": 45,
+      "terms": ["jason and lucia", "lucia and jason", "jason & lucia", "lucia & jason", "jason et lucia", "lucia et jason", "jason y lucia"]
+    },
+    {
+      "category": "alias",
+      "weight": 10,
+      "requiresContext": true,
+      "terms": ["jason", "lucia", "duval", "caminos", "boobie", "roxy", "dre'quan"]
+    },
+    { "category": "location", "weight": 55, "terms": ["leonida keys", "port gellhorn", "mount kalaga", "mount kalaga national park"] },
+    { "category": "location", "weight": 50, "terms": ["leonida", "grassrivers"] },
+    { "category": "location_amb", "weight": 35, "terms": ["gellhorn", "kalaga", "grass rivers"] },
+    { "category": "location_amb", "weight": 30, "terms": ["vice city"] },
+    { "category": "location_amb", "weight": 20, "terms": ["ambrosia"] },
+    { "category": "franchise", "weight": 25, "terms": ["gta", "grand theft auto"] },
+    { "category": "franchise", "weight": 20, "terms": ["rockstar games", "rockstar north"] },
+    {
+      "category": "cue",
+      "weight": 45,
+      "extended": true,
+      "terms": [
+        "next gta", "new gta", "upcoming gta", "gta sequel", "gta 5 sequel", "gta v sequel", "sixth gta",
+        "next grand theft auto", "new grand theft auto", "sixth grand theft auto", "rockstar's next game",
+        "rockstars next game", "prochain gta", "nouveau gta", "le prochain grand theft auto", "gta 5 successor"
+      ]
+    }
+  ],
+  "legacy": [
+    "gta 5", "gta v", "gta five", "gta 4", "gta iv", "gta four", "gta 3", "gta iii", "gta 2", "gta 1",
+    "gta san andreas", "gta sa", "gta vice city", "gta liberty city", "gta london", "gta chinatown wars",
+    "grand theft auto v", "grand theft auto 5", "grand theft auto iv", "grand theft auto 4",
+    "grand theft auto iii", "grand theft auto 3", "grand theft auto vice city", "grand theft auto san andreas",
+    "grand theft auto online", "gta online", "gta the trilogy", "gta trilogy", "definitive edition",
+    "vice city stories", "liberty city stories", "chinatown wars", "gta 5 online", "gta v online"
+  ]
+}

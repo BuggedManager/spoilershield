@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpoilerShield</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup" id="app" aria-busy="true">
+    <header class="top">
+      <img src="icons/icon48.png" alt="" width="30" height="30" class="logo">
+      <div class="brand">
+        <h1>SpoilerShield</h1>
+        <p class="muted">GTA 6 spoiler protection</p>
+      </div>
+      <label class="switch" title="Enable / disable protection">
+        <input type="checkbox" id="enabled" aria-label="Enable protection">
+        <span class="track"></span>
+      </label>
+    </header>
+
+    <section class="card status" aria-live="polite">
+      <div class="status-row">
+        <span class="dot" aria-hidden="true"></span>
+        <div class="status-text">
+          <div class="status-label">Protection Status: <strong id="statusText">ACTIVE</strong></div>
+          <div class="muted small" id="statusSub"></div>
+        </div>
+      </div>
+      <div class="stats" aria-label="Statistics">
+        <div class="stat"><span class="num" id="totalBlocked">0</span><span class="lbl">Total blocked</span></div>
+        <div class="stat"><span class="num" id="todayBlocked">0</span><span class="lbl">Blocked today</span></div>
+        <div class="stat"><span class="num" id="pageBlocked">0</span><span class="lbl">On this page</span></div>
+      </div>
+    </section>
+
+    <section class="card site" aria-labelledby="siteTitle">
+      <div class="site-head">
+        <div class="site-name"><span class="eyebrow">Current website</span><span class="site-host" id="siteTitle">—</span></div>
+        <span class="badge" id="siteBadge">—</span>
+      </div>
+      <div class="site-actions">
+        <button class="btn small" id="revealAll" type="button">Reveal all</button>
+        <button class="btn small" id="pauseSite" type="button">Pause on this site</button>
+      </div>
+    </section>
+
+    <section class="card mode" aria-label="Protection mode">
+      <div class="seg" role="group" aria-label="Protection mode">
+        <button type="button" data-mode="standard" aria-pressed="false">Standard</button>
+        <button type="button" data-mode="strict" aria-pressed="true">Strict</button>
+        <button type="button" data-mode="maximum" aria-pressed="false">Maximum</button>
+      </div>
+      <p class="muted small mode-desc" id="modeDesc"></p>
+    </section>
+
+    <section class="card toggles" aria-label="What to block">
+      <label class="toggle"><span><strong>Block GTA 6 content</strong><small class="muted">News, trailers, gameplay, any mention</small></span>
+        <span class="switch"><input type="checkbox" id="blockGameContent"><span class="track"></span></span></label>
+      <label class="toggle"><span><strong>Block potential story spoilers</strong><small class="muted">Endings, deaths, missions, leaks</small></span>
+        <span class="switch"><input type="checkbox" id="blockStorySpoilers"><span class="track"></span></span></label>
+      <label class="toggle"><span><strong>Block images &amp; thumbnails</strong><small class="muted">Use alt text and image names too</small></span>
+        <span class="switch"><input type="checkbox" id="blockImages"><span class="track"></span></span></label>
+    </section>
+
+    <section class="card kwcard" aria-label="Add custom keyword">
+      <form class="kw" id="kwForm">
+        <input class="input" id="kwInput" type="text" maxlength="120" placeholder="Add custom keyword…" aria-label="Custom keyword">
+        <select class="input kw-strength" id="kwStrength" aria-label="Keyword strength">
+          <option value="strong">Strong</option>
+          <option value="medium">Medium</option>
+          <option value="weak">Weak</option>
+        </select>
+        <button class="btn primary" type="submit">Add</button>
+      </form>
+      <p class="kw-msg small" id="kwMsg" role="status"></p>
+    </section>
+
+    <footer class="foot">
+      <button class="btn small" id="openSettings" type="button">Open settings</button>
+      <span class="faint small"><span id="kwCount"></span>100% local · no tracking</span>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

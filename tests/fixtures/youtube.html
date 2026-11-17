@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>YouTube</title>
+<style>
+  body { margin: 0; font-family: Roboto, Arial, sans-serif; background: #0f0f0f; color: #f1f1f1; }
+  #contents { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 24px; }
+  ytd-rich-item-renderer { display: block; }
+  .thumb { width: 100%; aspect-ratio: 16/9; border-radius: 12px; background: linear-gradient(135deg, #e11d48, #f59e0b); }
+  .title { font-weight: 600; margin-top: 8px; font-size: 15px; }
+  .meta { color: #aaa; font-size: 13px; }
+  ytd-searchbox { display: block; padding: 8px 24px; }
+  .ytSearchboxComponentSuggestionsContainer { background: #212121; width: 400px; border-radius: 12px; }
+  [role="option"] { display: block; padding: 6px 12px; }
+</style>
+<script>
+  // simulates YouTube creating cards after the initial HTML (like Polymer data binding)
+  window.makeCard = (title, channel) => {
+    const c = document.createElement('ytd-rich-item-renderer');
+    c.innerHTML = `<div id="content"><a id="thumbnail" href="/watch?v=x"><div class="thumb"></div></a>
+      <a id="video-title-link" title="${title}"><div class="title" id="video-title">${title}</div></a>
+      <div class="meta"><ytd-channel-name>${channel}</ytd-channel-name> · 1.2M views · 2 days ago</div></div>`;
+    return c;
+  };
+</script>
+</head>
+<body>
+<ytd-searchbox>
+  <div class="ytSearchboxComponentSuggestionsContainer" role="listbox">
+    <div role="option">gta 6 ending</div>
+    <div role="option">guitar lessons for beginners</div>
+  </div>
+</ytd-searchbox>
+<div id="contents">
+  <ytd-rich-item-renderer id="ssr-bad"><div id="content"><a id="thumbnail" href="/watch?v=a"><div class="thumb"></div></a><a id="video-title-link" title="GTA 6 Trailer 3 – Every Detail You Missed"><div class="title">GTA 6 Trailer 3 – Every Detail You Missed</div></a><div class="meta">GameBreakdowns · 3.1M views</div></div></ytd-rich-item-renderer>
+  <ytd-rich-item-renderer id="ssr-good"><div id="content"><a id="thumbnail" href="/watch?v=b"><div class="thumb"></div></a><a id="video-title-link" title="Lo-fi beats to study to"><div class="title">Lo-fi beats to study to</div></a><div class="meta">Chill Channel · 900K views</div></div></ytd-rich-item-renderer>
+  <ytd-rich-item-renderer id="ssr-fr"><div id="content"><a id="thumbnail" href="/watch?v=c"><div class="thumb"></div></a><a id="video-title-link" title="GTA VI : la fin expliquée (divulgâcheur)"><div class="title">GTA VI : la fin expliquée (divulgâcheur)</div></a><div class="meta">JeuxQC · 120K vues</div></div></ytd-rich-item-renderer>
+  <ytd-rich-item-renderer id="ssr-obf"><div id="content"><a id="thumbnail" href="/watch?v=d"><div class="thumb"></div></a><a id="video-title-link" title="G.T.Λ VI full map tour"><div class="title">G.T.Λ VI full map tour</div></a><div class="meta">MapNerd · 50K views</div></div></ytd-rich-item-renderer>
+</div>
+</body>
+</html>

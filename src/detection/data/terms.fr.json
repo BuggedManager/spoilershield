@@ -1,0 +1,22 @@
+{
+  "lang": "fr",
+  "label": "Français (France + Québec)",
+  "spoiler": [
+    "fin", "fins", "fin expliquee", "fin secrete", "vraie fin", "derniere mission", "mission finale",
+    "premiere mission", "histoire", "histoire complete", "histoire expliquee", "scenario", "intrigue",
+    "divulgacheur", "divulgacheurs", "divulgachage", "divulgacher", "divulgation", "spoil", "spoils",
+    "spoiler", "spoilers", "revelation", "revelations", "fuite", "fuites", "fuite gameplay",
+    "cinematique finale", "cinematique de fin", "trahison", "trahit", "mort", "meurt", "mourir",
+    "romance", "boss final", "combat final", "toutes les missions", "liste des missions",
+    "campagne complete", "campagne", "premiere heure", "premieres heures", "personnage secret",
+    "personnage cache", "rebondissement", "coup de theatre", "apres le generique", "scene post generique",
+    "epilogue", "denouement", "soluce", "soluce complete", "jeu complet", "sans commentaire",
+    "episode 1", "partie 1", "chapitre final"
+  ],
+  "media": [
+    "bande annonce", "bandes annonces", "gameplay", "carte", "personnages", "protagonistes", "captures",
+    "test", "apercu", "date de sortie", "sortie", "nouvelles", "rumeur", "rumeurs", "theorie", "theories",
+    "missions", "mission", "braquage", "vehicules", "armes", "graphismes", "analyse", "reaction",
+    "tout ce qu on sait", "en ligne"
+  ]
+}

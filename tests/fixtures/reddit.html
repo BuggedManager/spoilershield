@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Reddit - Dive into anything</title>
+<style>
+  body { margin: 0; background: #0b1416; color: #f2f4f5; font-family: system-ui, sans-serif; }
+  main { max-width: 740px; margin: 20px auto; display: flex; flex-direction: column; gap: 12px; }
+  shreddit-post { display: block; border-radius: 16px; background: #13191c; padding: 12px 16px; }
+  shreddit-comment { display: block; margin-left: 16px; }
+  [slot="comment"] { padding: 6px 0; }
+  .media { height: 160px; border-radius: 12px; background: linear-gradient(135deg, #22c55e, #0ea5e9); margin-top: 8px; }
+</style>
+<script>
+  // Simulates Reddit's shadow-DOM web components (Lit). Light DOM is slotted.
+  customElements.define('shreddit-post', class extends HTMLElement {
+    constructor() { super(); this.attachShadow({ mode: 'open' }).innerHTML = '<div part="card"><div style="font-size:12px;color:#8ba2ad">Posted in <span id="sub"></span></div><slot name="title"></slot><slot></slot></div>'; }
+    connectedCallback() { this.shadowRoot.getElementById('sub').textContent = this.getAttribute('subreddit-prefixed-name') || ''; }
+  });
+</script>
+</head>
+<body>
+<main>
+  <shreddit-post id="post-bad" post-title="Jason Duval and Lucia Caminos ending discussion" subreddit-prefixed-name="r/gaming">
+    <a slot="title" href="/r/gaming/comments/abc/discussion/"><h2>Ending discussion thread</h2></a>
+    <div class="media"></div>
+  </shreddit-post>
+  <shreddit-post id="post-sub" post-title="Daily hype thread" subreddit-prefixed-name="r/GTA6">
+    <a slot="title" href="/r/GTA6/comments/def/daily_hype_thread/"><h2>Daily hype thread</h2></a>
+  </shreddit-post>
+  <shreddit-post id="post-good" post-title="My grandma's sourdough starter turned 50" subreddit-prefixed-name="r/Breadit">
+    <a slot="title" href="/r/Breadit/comments/ghi/sourdough/"><h2>My grandma's sourdough starter turned 50</h2></a>
+    <div class="media"></div>
+  </shreddit-post>
+  <shreddit-comment id="c1"><div slot="comment"><p>Great bread! What flour do you use?</p></div>
+    <shreddit-comment id="c2"><div slot="comment"><p>unrelated but #gtavi leaks show the final heist</p></div></shreddit-comment>
+  </shreddit-comment>
+</main>
+</body>
+</html>

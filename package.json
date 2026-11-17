@@ -1,0 +1,26 @@
+{
+  "name": "spoilershield",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SpoilerShield - local, privacy-first GTA 6 spoiler protection for Google Chrome (Manifest V3)",
+  "type": "module",
+  "scripts": {
+    "dict": "tsx scripts/build-dictionary.ts",
+    "build": "npm run dict && node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:browser": "node scripts/browser-test.mjs",
+    "bench": "tsx scripts/bench.ts",
+    "all": "npm run typecheck && npm run build && npm test && npm run test:browser"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.7",
+    "@types/node": "^26.6.6",
+    "esbuild": "^0.28.2",
+    "jsdom": "^31.0.1",
+    "playwright-core": "^1.65.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  }
+}
